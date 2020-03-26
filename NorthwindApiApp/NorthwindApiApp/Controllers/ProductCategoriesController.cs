@@ -9,7 +9,7 @@ using Northwind.Services.Products;
 namespace NorthwindApiApp.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/categories")]
     public class ProductCategoriesController : Controller
     {
         private IProductManagementService productManagementService { get; set; }
@@ -19,14 +19,14 @@ namespace NorthwindApiApp.Controllers
             this.productManagementService = service;
         }
 
-        [HttpGet("many{offset, limit}")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<Product>> GetSeveral(int offset, int limit)
+        public ActionResult<IEnumerable<Product>> GetSeveral()
         {
             try
             {
-                return Ok(this.productManagementService.ShowProducts(offset, limit));
+                return Ok(this.productManagementService.ShowCategories(Int32.MaxValue, Int32.MaxValue));
             }
             catch (Exception ex)
             {
@@ -34,17 +34,17 @@ namespace NorthwindApiApp.Controllers
             }
         }
 
-        [HttpGet("one{id}")]
+        [HttpGet("/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Product> GetOne(int id)
         {
-            Product product = new Product();
+            ProductCategory category = new ProductCategory();
             try
             {
-                if (this.productManagementService.TryShowProduct(id, out product))
+                if (this.productManagementService.TryShowCategory(id, out category))
                 {
-                    return Ok(product);
+                    return Ok(category);
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
-                this.productManagementService.CreateProduct(new Product()
+                this.productManagementService.CreateCategory(new ProductCategory()
                 {
                     // TO DO: make normal creating of Product.
                 });
@@ -79,7 +79,7 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
-                if (this.productManagementService.DestroyProduct(id))
+                if (this.productManagementService.DestroyCategory(id))
                 {
                     return Ok();
                 }
@@ -95,11 +95,11 @@ namespace NorthwindApiApp.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(int id, Product product)
+        public IActionResult Update(int id, ProductCategory category)
         {
             try
             {
-                if(this.productManagementService.UpdateProduct(id, product))
+                if(this.productManagementService.UpdateCategories(id, category))
                 {
                     return Ok();
                 }
