@@ -2,13 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
+    using Northwind.Services.Context;
 
     /// <summary>
     /// Represents a stub for a product management service.
     /// </summary>
     public sealed class ProductManagementService : IProductManagementService
     {
+        private NorthwindContext Context { get; set; } = new NorthwindContext(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindContext>());
+
         /// <inheritdoc/>
         public int CreateCategory(ProductCategory productCategory)
         {
@@ -54,7 +58,23 @@
         /// <inheritdoc/>
         public IList<ProductCategory> ShowCategories(int offset, int limit)
         {
-            throw new NotImplementedException();
+            List<ProductCategory> categories = new List<ProductCategory>();
+            foreach (var category in this.Context.GetCategories())
+            {
+                categories.Add(this.FromStrToProductCategory(category));
+            }
+
+            return categories;
+        }
+
+        private ProductCategory FromStrToProductCategory(string from)
+        {
+            ProductCategory to = new ProductCategory();
+            var splited = from.Split(',');
+            to.Id = int.Parse(splited[0].Split(':')[1], CultureInfo.InvariantCulture);
+            to.Name = splited[1].Split(':')[1];
+            to.Description = splited[2].Split(':')[1];
+            return to;
         }
 
         /// <inheritdoc/>
@@ -72,7 +92,8 @@
         /// <inheritdoc/>
         public bool TryShowCategory(int categoryId, out ProductCategory productCategory)
         {
-            throw new NotImplementedException();
+            productCategory = new ProductCategory() { Id = 1, };
+            return true;
         }
 
         /// <inheritdoc/>

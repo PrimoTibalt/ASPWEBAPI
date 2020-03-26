@@ -30,21 +30,21 @@ namespace NorthwindApiApp.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return Ok(ex.Message + "\n" + ex.StackTrace);
             }
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Product> GetOne(int id)
+        public ActionResult<ProductCategory> GetOne(int id)
         {
             ProductCategory category = new ProductCategory();
             try
             {
                 if (this.productManagementService.TryShowCategory(id, out category))
                 {
-                    return Ok(category);
+                    return Ok();
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace NorthwindApiApp.Controllers
             {
                 this.productManagementService.CreateCategory(new ProductCategory()
                 {
-                    // TO DO: make normal creating of Product.
+                    // TO DO: make normal creating of ProductCategory.
                 });
                 return Ok();
             }
