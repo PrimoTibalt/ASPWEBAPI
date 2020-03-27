@@ -228,6 +228,26 @@
             return true;
         }
 
+        /// <summary>
+        /// Deletes row from table Products with same id as given.
+        /// </summary>
+        /// <param name="id">Id of product to delete.</param>
+        public void DeleteProduct(int id)
+        {
+            var rows = this.Set.Tables["Products"].Rows;
+            DataRow currentRow = null;
+            foreach (DataRow row in rows)
+            {
+                if (int.Parse(row["ID"].ToString()) == id)
+                {
+                    currentRow = row;
+                }
+            }
+
+            this.Set.Tables["Products"].Rows.Remove(currentRow);
+            this.UpdateXml();
+        }
+
         private void UpdateXml()
         {
             this.Set.Tables["Categories"].AcceptChanges();
