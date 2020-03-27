@@ -108,8 +108,7 @@
         /// Creates new row in Categories table by passed object of category.
         /// </summary>
         /// <param name="category">Object, to make new row.</param>
-        /// <returns>Id of given ProductCategory.</returns>
-        public int CreateNewCategory(ProductCategory category)
+        public void CreateNewCategory(ProductCategory category)
         {
             DataRow newCategory = this.Set.Tables["Categories"].NewRow();
             if (category is null)
@@ -125,8 +124,6 @@
             this.Set.Tables["Categories"].AcceptChanges();
 
             this.UpdateXml();
-
-            return category.Id;
         }
 
         /// <summary>
@@ -226,6 +223,35 @@
             this.UpdateXml();
 
             return true;
+        }
+
+        /// <summary>
+        /// Creates new row in Products table by passed object of product.
+        /// </summary>
+        /// <param name="product">Object, to make new row.</param>
+        public void CreateNewProduct(Product product)
+        {
+            DataRow newProduct = this.Set.Tables["Products"].NewRow();
+            if (product is null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            newProduct["ID"] = product.Id;
+            newProduct["Name"] = product.Name;
+            newProduct["Description"] = product.SupplierId;
+            newProduct["CategoryId"] = product.CategoryId;
+            newProduct["QuantityPerUnit"] = product.QuantityPerUnit;
+            newProduct["UnitPrice"] = product.UnitPrice;
+            newProduct["UnitsInStock"] = product.UnitsInStock;
+            newProduct["UnitsOnOrder"] = product.UnitsOnOrder;
+            newProduct["ReorderLevel"] = product.ReorderLevel;
+            newProduct["Discontinued"] = product.Discontinued;
+
+            this.Set.Tables["Products"].Rows.Add(newProduct);
+            this.Set.Tables["Products"].AcceptChanges();
+
+            this.UpdateXml();
         }
 
         /// <summary>
