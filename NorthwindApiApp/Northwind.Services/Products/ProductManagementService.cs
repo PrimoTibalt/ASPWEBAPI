@@ -96,7 +96,17 @@
         /// <inheritdoc/>
         public IList<Product> ShowProductsForCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            List<Product> productsWithSameCategory = new List<Product>();
+            foreach (var product in this.Context.GetProducts())
+            {
+                Product currentProduct = this.FromStrToProduct(product);
+                if (currentProduct.CategoryId == categoryId)
+                {
+                    productsWithSameCategory.Add(currentProduct);
+                }
+            }
+
+            return productsWithSameCategory;
         }
 
         /// <inheritdoc/>
