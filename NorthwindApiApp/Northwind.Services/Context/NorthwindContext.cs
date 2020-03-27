@@ -185,6 +185,49 @@
             this.UpdateXml();
         }
 
+        /// <summary>
+        /// Changes properties of product with same id.
+        /// </summary>
+        /// <param name="product">Id of product to change and changes.</param>
+        /// <returns>Is Successfull.</returns>
+        public bool UpdateProduct(Product product)
+        {
+            if (product is null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            var rows = this.Set.Tables["Products"].Rows;
+            DataRow currentRow = null;
+            foreach (DataRow row in rows)
+            {
+                if (int.Parse(row["ID"].ToString()) == product.Id)
+                {
+                    currentRow = row;
+                }
+            }
+
+            if (currentRow is null)
+            {
+                return false;
+            }
+
+            currentRow["ID"] = product.Id;
+            currentRow["Name"] = product.Name;
+            currentRow["SupplierId"] = product.SupplierId;
+            currentRow["CategoryId"] = product.CategoryId;
+            currentRow["QuantityPerUnit"] = product.QuantityPerUnit;
+            currentRow["UnitPrice"] = product.UnitPrice;
+            currentRow["UnitsInStock"] = product.UnitsInStock;
+            currentRow["UnitsOnOrder"] = product.UnitsOnOrder;
+            currentRow["ReorderLevel"] = product.ReorderLevel;
+            currentRow["Discontinued"] = product.Discontinued;
+            currentRow.AcceptChanges();
+            this.UpdateXml();
+
+            return true;
+        }
+
         private void UpdateXml()
         {
             this.Set.Tables["Categories"].AcceptChanges();
