@@ -16,7 +16,13 @@
         /// <inheritdoc/>
         public int CreateCategory(ProductCategory productCategory)
         {
-            throw new NotImplementedException();
+            if (productCategory is null)
+            {
+                throw new ArgumentNullException(nameof(productCategory));
+            }
+
+            this.Context.CreateNewCategory(productCategory);
+            return productCategory.Id;
         }
 
         /// <inheritdoc/>
@@ -67,16 +73,6 @@
             return categories;
         }
 
-        private ProductCategory FromStrToProductCategory(string from)
-        {
-            ProductCategory to = new ProductCategory();
-            var splited = from.Split(',');
-            to.Id = int.Parse(splited[0].Split(':')[1], CultureInfo.InvariantCulture);
-            to.Name = splited[1].Split(':')[1];
-            to.Description = splited[2].Split(':')[1];
-            return to;
-        }
-
         /// <inheritdoc/>
         public IList<Product> ShowProducts(int offset, int limit)
         {
@@ -92,8 +88,17 @@
         /// <inheritdoc/>
         public bool TryShowCategory(int categoryId, out ProductCategory productCategory)
         {
-            productCategory = new ProductCategory() { Id = 1, };
-            return true;
+            foreach (var category in this.Context.GetCategories())
+            {
+                productCategory = this.FromStrToProductCategory(category);
+                if (productCategory.Id == categoryId)
+                {
+                    return true;
+                }
+            }
+
+            productCategory = new ProductCategory();
+            return false;
         }
 
         /// <inheritdoc/>
@@ -124,6 +129,16 @@
         public bool UpdateProduct(int productId, Product product)
         {
             throw new NotImplementedException();
+        }
+
+        private ProductCategory FromStrToProductCategory(string from)
+        {
+            ProductCategory to = new ProductCategory();
+            var splited = from.Split(',');
+            to.Id = int.Parse(splited[0].Split(':')[1], CultureInfo.InvariantCulture);
+            to.Name = splited[1].Split(':')[1];
+            to.Description = splited[2].Split(':')[1];
+            return to;
         }
     }
 }
