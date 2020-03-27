@@ -74,13 +74,43 @@
         /// <inheritdoc/>
         public IList<ProductCategory> LookupCategoriesByName(IList<string> names)
         {
-            throw new NotImplementedException();
+            if (names is null)
+            {
+                throw new ArgumentNullException(nameof(names));
+            }
+
+            List<ProductCategory> categoriesWithSameName = new List<ProductCategory>();
+            foreach (var category in this.Context.GetCategories())
+            {
+                ProductCategory currentCategory = this.FromStrToProductCategory(category);
+                if (names.Contains(currentCategory.Name))
+                {
+                    categoriesWithSameName.Add(currentCategory);
+                }
+            }
+
+            return categoriesWithSameName;
         }
 
         /// <inheritdoc/>
         public IList<Product> LookupProductsByName(IList<string> names)
         {
-            throw new NotImplementedException();
+            if (names is null)
+            {
+                throw new ArgumentNullException(nameof(names));
+            }
+
+            List<Product> productsWithSameName = new List<Product>();
+            foreach (var product in this.Context.GetProducts())
+            {
+                Product currentProduct = this.FromStrToProduct(product);
+                if (names.Contains(currentProduct.Name))
+                {
+                    productsWithSameName.Add(currentProduct);
+                }
+            }
+
+            return productsWithSameName;
         }
 
         /// <inheritdoc/>
