@@ -22,7 +22,7 @@ namespace NorthwindApiApp.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<Product>> GetSeveral()
+        public ActionResult<IEnumerable<ProductCategory>> GetSeveral()
         {
             try
             {

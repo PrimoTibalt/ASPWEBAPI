@@ -3,7 +3,7 @@
   <Categories>
     <ID>1</ID>
     <Name>Shit for parents</Name>
-    <Description>Any thing, that will make angry my parents</Description>
+    <Description>Any thing that will make angry my parents</Description>
   </Categories>
   <Categories>
     <ID>2</ID>
@@ -13,25 +13,13 @@
   <Categories>
     <ID>3</ID>
     <Name>Starbuckes coffee</Name>
-    <Description>It isn't a coffee, just bait</Description>
+    <Description>It isn't a coffee just bait</Description>
   </Categories>
   <Categories>
     <ID>5</ID>
     <Name>Solo</Name>
     <Description>middle - item 5.</Description>
   </Categories>
-  <Products>
-    <ID>0</ID>
-    <Name>item number 0</Name>
-    <SupplierID>1</SupplierID>
-    <CategoryID>1</CategoryID>
-    <QuantityPerUnit>100 in each unit</QuantityPerUnit>
-    <UnitPrice>11.5</UnitPrice>
-    <UnitsInStock>0</UnitsInStock>
-    <UnitsOnOrder>1</UnitsOnOrder>
-    <ReorderLevel>1</ReorderLevel>
-    <Discontinued>false</Discontinued>
-  </Products>
   <Products>
     <ID>1</ID>
     <Name>item number 1</Name>
@@ -58,13 +46,13 @@
   </Products>
   <Products>
     <ID>3</ID>
-    <Name>item number 3</Name>
-    <SupplierID>4</SupplierID>
-    <CategoryID>2</CategoryID>
-    <QuantityPerUnit>103 in each unit</QuantityPerUnit>
-    <UnitPrice>41.5</UnitPrice>
-    <UnitsInStock>1</UnitsInStock>
-    <UnitsOnOrder>1</UnitsOnOrder>
+    <Name>goblen</Name>
+    <SupplierID>2</SupplierID>
+    <CategoryID>1</CategoryID>
+    <QuantityPerUnit>nwm</QuantityPerUnit>
+    <UnitPrice>3200</UnitPrice>
+    <UnitsInStock>30</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
     <ReorderLevel>1</ReorderLevel>
     <Discontinued>false</Discontinued>
   </Products>
@@ -139,5 +127,17 @@
     <UnitsOnOrder>2</UnitsOnOrder>
     <ReorderLevel>1</ReorderLevel>
     <Discontinued>true</Discontinued>
+  </Products>
+  <Products>
+    <ID>10</ID>
+    <Name>myown</Name>
+    <SupplierID>15</SupplierID>
+    <CategoryID>1</CategoryID>
+    <QuantityPerUnit>4 items in 1 unit</QuantityPerUnit>
+    <UnitPrice>500</UnitPrice>
+    <UnitsInStock>10</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
   </Products>
 </Northwind>
