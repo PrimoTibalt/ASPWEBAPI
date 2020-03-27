@@ -2,3 +2,9 @@
 
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = silent
+
+# SA0001: XML comment analysis is disabled due to project configuration
+dotnet_diagnostic.SA0001.severity = silent
+
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = silent
