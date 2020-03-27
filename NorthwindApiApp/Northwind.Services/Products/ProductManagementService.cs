@@ -45,7 +45,7 @@
                 this.Context.DeleteCategory(categoryId);
                 return true;
             }
-            catch (Exception)
+            catch (KeyNotFoundException)
             {
                 return false;
             }
@@ -65,7 +65,7 @@
                 this.Context.DeleteProduct(productId);
                 return true;
             }
-            catch (Exception)
+            catch (KeyNotFoundException)
             {
                 return false;
             }
@@ -196,10 +196,16 @@
         {
             try
             {
-                this.Context.UpdateCategory(productCategory);
-                return true;
+                if (this.Context.UpdateCategory(productCategory))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }
@@ -216,10 +222,16 @@
         {
             try
             {
-                this.Context.UpdateProduct(product);
-                return true;
+                if (this.Context.UpdateProduct(product))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            catch (Exception)
+            catch (ArgumentNullException)
             {
                 return false;
             }

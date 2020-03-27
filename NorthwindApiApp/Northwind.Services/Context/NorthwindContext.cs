@@ -127,7 +127,7 @@
         }
 
         /// <summary>
-        /// Updates one of the rows in Categories table.;
+        /// Updates one of the rows in Categories table.
         /// </summary>
         /// <param name="category">Parameters to update.</param>
         /// <returns>Is successful.</returns>
@@ -176,6 +176,11 @@
                 {
                     currentRow = row;
                 }
+            }
+
+            if (currentRow is null)
+            {
+                throw new KeyNotFoundException("No Category with such Id!");
             }
 
             this.Set.Tables["Categories"].Rows.Remove(currentRow);
@@ -268,6 +273,11 @@
                 {
                     currentRow = row;
                 }
+            }
+
+            if (currentRow is null)
+            {
+                throw new KeyNotFoundException("No Product with such Id!");
             }
 
             this.Set.Tables["Products"].Rows.Remove(currentRow);
