@@ -76,7 +76,7 @@ namespace NorthwindApiApp.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
