@@ -44,7 +44,7 @@ namespace NorthwindApiApp.Controllers
             {
                 if (this.productManagementService.TryShowCategory(id, out category))
                 {
-                    return Ok();
+                    return Ok(category);
                 }
                 else
                 {
@@ -57,20 +57,22 @@ namespace NorthwindApiApp.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Create()
+        [HttpPost("{name}/{description}")]
+        public IActionResult Create(string name, string description)
         {
             try
             {
                 this.productManagementService.CreateCategory(new ProductCategory()
                 {
-                    // TO DO: make normal creating of ProductCategory.
+                    Id = this.productManagementService.ShowCategories(10, 10).Count + 1,
+                    Name = name,
+                    Description = description + $" - item {this.productManagementService.ShowCategories(10, 10).Count + 1}.",
                 });
-                return Ok();
+                return Ok(this.productManagementService.ShowCategories(10, 10));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message + "\n" + ex.StackTrace);
             }
         }
 
