@@ -28,7 +28,13 @@
         /// <inheritdoc/>
         public int CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            if (product is null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            this.Context.CreateNewProduct(product);
+            return product.Id;
         }
 
         /// <inheritdoc/>
