@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Xml;
     using Microsoft.EntityFrameworkCore;
+    using Northwind.Services.Products;
 
     /// <summary>
     /// Context for in-memory database Northwind.
@@ -53,42 +55,9 @@
 
             this.Set.Relations.Add("ProductsCategories", this.Set.Tables["Categories"].Columns["ID"], this.Set.Tables["Products"].Columns["CategoryID"]);
 
-            for (int item = 0; item < 10; item++)
-            {
-                DataRow newRowProducts = products.NewRow();
-                int categoryIdValue = (item < 3) ? 1 : (item < 7) ? 2 : 3;
-                newRowProducts["ID"] = item;
-                newRowProducts["Name"] = $"item number {item}";
-                newRowProducts["SupplierID"] = item + 1;
-                newRowProducts["CategoryID"] = categoryIdValue;
-                newRowProducts["QuantityPerUnit"] = $"{item+100} in each unit";
-                newRowProducts["UnitPrice"] = (item * 10) + 12 - 0.5;
-                newRowProducts["UnitsInStock"] = (short?) Math.Sqrt(item);
-                newRowProducts["UnitsOnOrder"] = (short?)Math.Sqrt(((item - 1) < 0) ? 1 : item - 1);
-                newRowProducts["ReorderLevel"] = 1;
-                newRowProducts["Discontinued"] = (item > 5) ? true : false;
-            }
-
-            DataRow first = categories.NewRow();
-            first["ID"] = 1;
-            first["Name"] = "Shit for parents";
-            first["Description"] = "Any thing, that will make angry my parents";
-            categories.Rows.Add(first);
-
-            DataRow second = categories.NewRow();
-            second["ID"] = 2;
-            second["Name"] = "My dreams";
-            second["Description"] = "Useless things";
-            categories.Rows.Add(second);
-
-            DataRow third = categories.NewRow();
-            third["ID"] = 3;
-            third["Name"] = "Starbuckes coffee";
-            third["Description"] = "It isn't a coffee, just bait";
-            categories.Rows.Add(third);
-
-            categories.AcceptChanges();
-            products.AcceptChanges();
+            XmlReader reader = XmlReader.Create("InMemory.xml");
+            _ = this.Set.ReadXml(reader, XmlReadMode.ReadSchema);
+            reader.Dispose();
         }
 
         /// <summary>
@@ -124,6 +93,32 @@
             }
 
             return rows;
+        }
+
+        /// <summary>
+        /// Creates new row in Categories table by passed object of category.
+        /// </summary>
+        /// <param name="category">Object, to make new row.</param>
+        /// <returns>Id of given ProductCategory.</returns>
+        public int CreateNewCategory(ProductCategory category)
+        {
+            DataRow newCategory = this.Set.Tables["Categories"].NewRow();
+            if (category is null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            newCategory["ID"] = category.Id;
+            newCategory["Name"] = category.Name;
+            newCategory["Description"] = category.Description;
+
+            this.Set.Tables["Categories"].Rows.Add(newCategory);
+            this.Set.Tables["Categories"].AcceptChanges();
+
+            this.Set.AcceptChanges();
+            this.Set.WriteXml("InMemory.xml");
+
+            return category.Id;
         }
     }
 }
