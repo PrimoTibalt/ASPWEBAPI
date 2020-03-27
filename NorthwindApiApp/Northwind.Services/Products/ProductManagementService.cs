@@ -84,7 +84,13 @@
         /// <inheritdoc/>
         public IList<Product> ShowProducts(int offset, int limit)
         {
-            throw new NotImplementedException();
+            List<Product> products = new List<Product>();
+            foreach (var product in this.Context.GetProducts())
+            {
+                products.Add(this.FromStrToProduct(product));
+            }
+
+            return products;
         }
 
         /// <inheritdoc/>
@@ -118,7 +124,17 @@
         /// <inheritdoc/>
         public bool TryShowProduct(int productId, out Product product)
         {
-            throw new NotImplementedException();
+            foreach (var productOfContext in this.Context.GetProducts())
+            {
+                product = this.FromStrToProduct(productOfContext);
+                if (product.Id == productId)
+                {
+                    return true;
+                }
+            }
+
+            product = new Product();
+            return false;
         }
 
         /// <inheritdoc/>
@@ -129,7 +145,7 @@
                 this.Context.UpdateCategory(productCategory);
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -154,6 +170,23 @@
             to.Id = int.Parse(splited[0].Split(':')[1], CultureInfo.InvariantCulture);
             to.Name = splited[1].Split(':')[1];
             to.Description = splited[2].Split(':')[1];
+            return to;
+        }
+
+        private Product FromStrToProduct(string from)
+        {
+            Product to = new Product();
+            var splited = from.Split(',');
+            to.Id = int.Parse(splited[0].Split(':')[1], CultureInfo.InvariantCulture);
+            to.Name = splited[1].Split(':')[1];
+            to.SupplierId = int.Parse(splited[2].Split(':')[1], CultureInfo.InvariantCulture);
+            to.CategoryId = int.Parse(splited[3].Split(':')[1], CultureInfo.InvariantCulture);
+            to.QuantityPerUnit = splited[4].Split(':')[1];
+            to.UnitPrice = decimal.Parse(splited[5].Split(':')[1], CultureInfo.InvariantCulture);
+            to.UnitsInStock = short.Parse(splited[6].Split(':')[1], CultureInfo.InvariantCulture);
+            to.UnitsOnOrder = short.Parse(splited[7].Split(':')[1], CultureInfo.InvariantCulture);
+            to.ReorderLevel = short.Parse(splited[8].Split(':')[1], CultureInfo.InvariantCulture);
+            to.Discontinued = bool.Parse(splited[9].Split(':')[1]);
             return to;
         }
     }
