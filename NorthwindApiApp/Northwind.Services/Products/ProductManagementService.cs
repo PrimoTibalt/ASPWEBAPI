@@ -160,7 +160,15 @@
         /// <inheritdoc/>
         public bool UpdateProduct(int productId, Product product)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.Context.UpdateProduct(product);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private ProductCategory FromStrToProductCategory(string from)
