@@ -115,10 +115,54 @@
             this.Set.Tables["Categories"].Rows.Add(newCategory);
             this.Set.Tables["Categories"].AcceptChanges();
 
-            this.Set.AcceptChanges();
-            this.Set.WriteXml("InMemory.xml");
+            this.UpdateXml();
 
             return category.Id;
+        }
+
+        /// <summary>
+        /// Updates one of the rows in Categories table.;
+        /// </summary>
+        /// <param name="category">Parameters to update.</param>
+        /// <returns>Is successful.</returns>
+        public bool UpdateCategory(ProductCategory category)
+        {
+            if (category is null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            var rows = this.Set.Tables["Categories"].Rows;
+            DataRow currentRow = null;
+            foreach (DataRow row in rows)
+            {
+                if (int.Parse(row["ID"].ToString()) == category.Id)
+                {
+                    currentRow = row;
+                }
+            }
+
+            if (currentRow is null)
+            {
+                return false;
+            }
+
+            currentRow["ID"] = category.Id;
+            currentRow["Name"] = category.Name;
+            currentRow["Description"] = category.Description;
+            currentRow.AcceptChanges();
+            this.UpdateXml();
+
+            return true;
+        }
+
+        private void UpdateXml()
+        {
+            this.Set.Tables["Categories"].AcceptChanges();
+            this.Set.Tables["Products"].AcceptChanges();
+
+            this.Set.AcceptChanges();
+            this.Set.WriteXml("InMemory.xml");
         }
     }
 }

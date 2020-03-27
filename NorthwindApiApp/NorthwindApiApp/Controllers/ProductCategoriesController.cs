@@ -96,21 +96,14 @@ namespace NorthwindApiApp.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Update(int id, ProductCategory category)
-        {
-            try
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]ProductCategory category)
+        { 
+            if (this.productManagementService.UpdateCategories(id, category))
             {
-                if(this.productManagementService.UpdateCategories(id, category))
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return NoContent();
             }
-            catch (Exception)
+            else
             {
                 return BadRequest();
             }

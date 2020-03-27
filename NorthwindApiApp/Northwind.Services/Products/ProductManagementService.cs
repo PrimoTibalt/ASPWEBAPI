@@ -116,7 +116,15 @@
         /// <inheritdoc/>
         public bool UpdateCategories(int categoryId, ProductCategory productCategory)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.Context.UpdateCategory(productCategory);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc/>
