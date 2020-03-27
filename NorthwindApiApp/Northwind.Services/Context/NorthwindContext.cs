@@ -79,7 +79,7 @@
                     $"SupplierId:{row["SupplierId"]}," +
                     $"CategoryId:{row["CategoryId"]}," +
                     $"QuantityPerUnit:{row["QuantityPerUnit"]}," +
-                    $"UnitPrice:{row["UnitPrice"]}," +
+                    $"UnitPrice:{row["UnitPrice"].ToString().Replace(',', '.')}," +
                     $"UnitsInStock:{row["UnitsInStock"]}," +
                     $"UnitsOnOrder:{row["UnitsOnOrder"]}," +
                     $"ReorderLevel:{row["ReorderLevel"]}," +
@@ -244,7 +244,7 @@
 
             newProduct["ID"] = product.Id;
             newProduct["Name"] = product.Name;
-            newProduct["Description"] = product.SupplierId;
+            newProduct["SupplierId"] = product.SupplierId;
             newProduct["CategoryId"] = product.CategoryId;
             newProduct["QuantityPerUnit"] = product.QuantityPerUnit;
             newProduct["UnitPrice"] = product.UnitPrice;
