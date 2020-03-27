@@ -34,7 +34,15 @@
         /// <inheritdoc/>
         public bool DestroyCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.Context.DeleteCategory(categoryId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc/>
