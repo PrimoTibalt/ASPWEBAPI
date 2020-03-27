@@ -1,0 +1,148 @@
+<?xml version="1.0" standalone="yes"?>
+<Northwind>
+  <Categories>
+    <ID>1</ID>
+    <Name>Shit for parents</Name>
+    <Description>Any thing, that will make angry my parents</Description>
+  </Categories>
+  <Categories>
+    <ID>2</ID>
+    <Name>My dreams</Name>
+    <Description>Useless things</Description>
+  </Categories>
+  <Categories>
+    <ID>3</ID>
+    <Name>Starbuckes coffee</Name>
+    <Description>It isn't a coffee, just bait</Description>
+  </Categories>
+  <Categories>
+    <ID>4</ID>
+    <Name>Solo</Name>
+    <Description>middle - item 4.</Description>
+  </Categories>
+  <Categories>
+    <ID>5</ID>
+    <Name>Solo</Name>
+    <Description>middle - item 5.</Description>
+  </Categories>
+  <Products>
+    <ID>0</ID>
+    <Name>item number 0</Name>
+    <SupplierID>1</SupplierID>
+    <CategoryID>1</CategoryID>
+    <QuantityPerUnit>100 in each unit</QuantityPerUnit>
+    <UnitPrice>11.5</UnitPrice>
+    <UnitsInStock>0</UnitsInStock>
+    <UnitsOnOrder>1</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>1</ID>
+    <Name>item number 1</Name>
+    <SupplierID>2</SupplierID>
+    <CategoryID>1</CategoryID>
+    <QuantityPerUnit>101 in each unit</QuantityPerUnit>
+    <UnitPrice>21.5</UnitPrice>
+    <UnitsInStock>1</UnitsInStock>
+    <UnitsOnOrder>0</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>2</ID>
+    <Name>item number 2</Name>
+    <SupplierID>3</SupplierID>
+    <CategoryID>1</CategoryID>
+    <QuantityPerUnit>102 in each unit</QuantityPerUnit>
+    <UnitPrice>31.5</UnitPrice>
+    <UnitsInStock>1</UnitsInStock>
+    <UnitsOnOrder>1</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>3</ID>
+    <Name>item number 3</Name>
+    <SupplierID>4</SupplierID>
+    <CategoryID>2</CategoryID>
+    <QuantityPerUnit>103 in each unit</QuantityPerUnit>
+    <UnitPrice>41.5</UnitPrice>
+    <UnitsInStock>1</UnitsInStock>
+    <UnitsOnOrder>1</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>4</ID>
+    <Name>item number 4</Name>
+    <SupplierID>5</SupplierID>
+    <CategoryID>2</CategoryID>
+    <QuantityPerUnit>104 in each unit</QuantityPerUnit>
+    <UnitPrice>51.5</UnitPrice>
+    <UnitsInStock>2</UnitsInStock>
+    <UnitsOnOrder>1</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>5</ID>
+    <Name>item number 5</Name>
+    <SupplierID>6</SupplierID>
+    <CategoryID>2</CategoryID>
+    <QuantityPerUnit>105 in each unit</QuantityPerUnit>
+    <UnitPrice>61.5</UnitPrice>
+    <UnitsInStock>2</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>false</Discontinued>
+  </Products>
+  <Products>
+    <ID>6</ID>
+    <Name>item number 6</Name>
+    <SupplierID>7</SupplierID>
+    <CategoryID>2</CategoryID>
+    <QuantityPerUnit>106 in each unit</QuantityPerUnit>
+    <UnitPrice>71.5</UnitPrice>
+    <UnitsInStock>2</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>true</Discontinued>
+  </Products>
+  <Products>
+    <ID>7</ID>
+    <Name>item number 7</Name>
+    <SupplierID>8</SupplierID>
+    <CategoryID>3</CategoryID>
+    <QuantityPerUnit>107 in each unit</QuantityPerUnit>
+    <UnitPrice>81.5</UnitPrice>
+    <UnitsInStock>2</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>true</Discontinued>
+  </Products>
+  <Products>
+    <ID>8</ID>
+    <Name>item number 8</Name>
+    <SupplierID>9</SupplierID>
+    <CategoryID>3</CategoryID>
+    <QuantityPerUnit>108 in each unit</QuantityPerUnit>
+    <UnitPrice>91.5</UnitPrice>
+    <UnitsInStock>2</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>true</Discontinued>
+  </Products>
+  <Products>
+    <ID>9</ID>
+    <Name>item number 9</Name>
+    <SupplierID>10</SupplierID>
+    <CategoryID>3</CategoryID>
+    <QuantityPerUnit>109 in each unit</QuantityPerUnit>
+    <UnitPrice>101.5</UnitPrice>
+    <UnitsInStock>3</UnitsInStock>
+    <UnitsOnOrder>2</UnitsOnOrder>
+    <ReorderLevel>1</ReorderLevel>
+    <Discontinued>true</Discontinued>
+  </Products>
+</Northwind>
