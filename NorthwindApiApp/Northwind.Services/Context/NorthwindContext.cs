@@ -74,7 +74,16 @@
             List<string> rows = new List<string>();
             foreach (DataRow row in this.Set.Tables["Products"].Rows)
             {
-                rows.Add($"ID:{row["ID"]},Name:{row["Name"]}, Description:{row["Description"]}");
+                rows.Add($"ID:{row["ID"]}," +
+                    $"Name:{row["Name"]}," +
+                    $"SupplierId:{row["SupplierId"]}," +
+                    $"CategoryId:{row["CategoryId"]}," +
+                    $"QuantityPerUnit:{row["QuantityPerUnit"]}," +
+                    $"UnitPrice:{row["UnitPrice"]}," +
+                    $"UnitsInStock:{row["UnitsInStock"]}," +
+                    $"UnitsOnOrder:{row["UnitsOnOrder"]}," +
+                    $"ReorderLevel:{row["ReorderLevel"]}," +
+                    $"Discontinued:{row["Discontinued"]}");
             }
 
             return rows;
