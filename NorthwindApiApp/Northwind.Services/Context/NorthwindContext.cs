@@ -156,6 +156,26 @@
             return true;
         }
 
+        /// <summary>
+        /// Deletes a row from the table of Categories with given id.
+        /// </summary>
+        /// <param name="id">id of a row to delete.</param>
+        public void DeleteCategory(int id)
+        {
+            var rows = this.Set.Tables["Categories"].Rows;
+            DataRow currentRow = null;
+            foreach (DataRow row in rows)
+            {
+                if (int.Parse(row["ID"].ToString()) == id)
+                {
+                    currentRow = row;
+                }
+            }
+
+            this.Set.Tables["Categories"].Rows.Remove(currentRow);
+            this.UpdateXml();
+        }
+
         private void UpdateXml()
         {
             this.Set.Tables["Categories"].AcceptChanges();
