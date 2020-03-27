@@ -54,7 +54,15 @@
         /// <inheritdoc/>
         public bool DestroyProduct(int productId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.Context.DeleteProduct(productId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc/>
