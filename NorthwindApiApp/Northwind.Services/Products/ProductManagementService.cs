@@ -54,7 +54,29 @@
         /// <inheritdoc/>
         public bool DestroyPicture(int categoryId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = new ProductCategory();
+                if (this.TryShowCategory(categoryId, out category))
+                {
+                    File.Delete("C:" + category.Description);
+                    category.Description = "No Picture";
+                    this.UpdateCategories(categoryId, category);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (KeyNotFoundException)
+            {
+                return false;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc/>
@@ -172,7 +194,26 @@
         /// <inheritdoc/>
         public bool TryShowPicture(int categoryId, out byte[] bytes)
         {
-            throw new NotImplementedException();
+            foreach (var category in this.Context.GetCategories())
+            {
+                var categoryObj = this.FromStrToProductCategory(category);
+                if (categoryObj.Id == categoryId)
+                {
+                    try
+                    {
+                        bytes = File.ReadAllBytes(categoryObj.Description);
+                        return true;
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        bytes = null;
+                        return false;
+                    }
+                }
+            }
+
+            bytes = null;
+            return false;
         }
 
         /// <inheritdoc/>
