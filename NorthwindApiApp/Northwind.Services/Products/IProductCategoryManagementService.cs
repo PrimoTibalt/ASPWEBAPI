@@ -8,13 +8,6 @@
     public interface IProductCategoryManagementService
     {
         /// <summary>
-        /// Shows a list of products that belongs to a specified category.
-        /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="Product"/>.</returns>
-        IList<Product> ShowProductsForCategory(int categoryId);
-
-        /// <summary>
         /// Shows a list of product categories using specified offset and limit for pagination.
         /// </summary>
         /// <param name="offset">An offset of the first element to return.</param>
