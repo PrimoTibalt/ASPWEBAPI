@@ -73,9 +73,12 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
+                var categories = this.productCategoryManagementService.ShowCategories(10, 10);
+                int newId = ProductCategoriesController.CalculateNewId(categories);
+
                 this.productCategoryManagementService.CreateCategory(new ProductCategory()
                 {
-                    Id = this.productCategoryManagementService.ShowCategories(10, 10).Count + 1,
+                    Id = newId,
                     Name = name,
                     Description = description + $" - item {this.productCategoryManagementService.ShowCategories(10, 10).Count + 1}.",
                 });
@@ -245,6 +248,30 @@ namespace NorthwindApiApp.Controllers
             }
 
             return mediaType.Encoding;
+        }
+
+        private static int CalculateNewId(IList<ProductCategory> categories)
+        {
+            int goodNewId = -1;
+            for (int newId = 1; newId < Int32.MaxValue; newId++)
+            {
+                foreach (var category in categories)
+                {
+                    if (category.Id == newId)
+                    {
+                        break;
+                    }
+
+                    goodNewId = newId;
+                }
+
+                if (goodNewId != -1)
+                {
+                    break;
+                }
+            }
+
+            return goodNewId;
         }
     }
 
