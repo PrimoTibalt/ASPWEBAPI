@@ -20,6 +20,8 @@
                 throw new ArgumentNullException(nameof(product));
             }
 
+            product.Id = ProductManagementService.CalculateNewId(this.ShowProducts(10, 10));
+
             this.Context.CreateNewProduct(product);
             return product.Id;
         }
@@ -108,6 +110,12 @@
         {
             try
             {
+                if (product is null)
+                {
+                    return false;
+                }
+
+                product.Id = productId;
                 if (this.Context.UpdateProduct(product))
                 {
                     return true;
@@ -121,6 +129,27 @@
             {
                 return false;
             }
+        }
+
+        private static int CalculateNewId(IList<Product> products)
+        {
+            int goodNewId = -1;
+            List<int> idCollection = new List<int>();
+            foreach (var product in products)
+            {
+                idCollection.Add(product.Id);
+            }
+
+            for (int newId = 1; newId < int.MaxValue; newId++)
+            {
+                if (!idCollection.Contains(newId))
+                {
+                    goodNewId = newId;
+                    break;
+                }
+            }
+
+            return goodNewId;
         }
 
         private Product FromStrToProduct(string from)
