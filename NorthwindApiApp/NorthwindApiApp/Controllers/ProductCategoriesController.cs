@@ -253,20 +253,17 @@ namespace NorthwindApiApp.Controllers
         private static int CalculateNewId(IList<ProductCategory> categories)
         {
             int goodNewId = -1;
+            List<int> idCollection = new List<int>();
+            foreach (var category in categories)
+            {
+                idCollection.Add(category.Id);
+            }
+
             for (int newId = 1; newId < Int32.MaxValue; newId++)
             {
-                foreach (var category in categories)
+                if (!idCollection.Contains(newId))
                 {
-                    if (category.Id == newId)
-                    {
-                        break;
-                    }
-
                     goodNewId = newId;
-                }
-
-                if (goodNewId != -1)
-                {
                     break;
                 }
             }
