@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
 using Northwind.Services.Products;
 using NorthwindApiApp.Utilities;
 using System.Text;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Extensions.Configuration;
 
 namespace NorthwindApiApp.Controllers
 {
@@ -22,13 +18,16 @@ namespace NorthwindApiApp.Controllers
     [Route("api/categories")]
     public class ProductCategoriesController : Controller
     {
-        private IProductManagementService productManagementService { get; set; }
+        private IProductCategoryManagementService productCategoryManagementService { get; set; }
+
+        private IProductCategoryPicturesService productCategoryPicturesService { get; set; }
 
         private static readonly FormOptions _defaultFormOptions = new FormOptions();
 
-        public ProductCategoriesController(IProductManagementService service)
+        public ProductCategoriesController(IProductCategoryManagementService categoryService, IProductCategoryPicturesService pictureService)
         {
-            this.productManagementService = service;
+            this.productCategoryManagementService = categoryService;
+            this.productCategoryPicturesService = pictureService;
         }
 
         [HttpGet]
@@ -38,7 +37,7 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
-                return Ok(this.productManagementService.ShowCategories(Int32.MaxValue, Int32.MaxValue));
+                return Ok(this.productCategoryManagementService.ShowCategories(Int32.MaxValue, Int32.MaxValue));
             }
             catch (Exception ex)
             {
@@ -54,7 +53,7 @@ namespace NorthwindApiApp.Controllers
             ProductCategory category = new ProductCategory();
             try
             {
-                if (this.productManagementService.TryShowCategory(id, out category))
+                if (this.productCategoryManagementService.TryShowCategory(id, out category))
                 {
                     return Ok(category);
                 }
@@ -74,13 +73,13 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
-                this.productManagementService.CreateCategory(new ProductCategory()
+                this.productCategoryManagementService.CreateCategory(new ProductCategory()
                 {
-                    Id = this.productManagementService.ShowCategories(10, 10).Count + 1,
+                    Id = this.productCategoryManagementService.ShowCategories(10, 10).Count + 1,
                     Name = name,
-                    Description = description + $" - item {this.productManagementService.ShowCategories(10, 10).Count + 1}.",
+                    Description = description + $" - item {this.productCategoryManagementService.ShowCategories(10, 10).Count + 1}.",
                 });
-                return Ok(this.productManagementService.ShowCategories(10, 10));
+                return Ok(this.productCategoryManagementService.ShowCategories(10, 10));
             }
             catch (Exception ex)
             {
@@ -93,7 +92,7 @@ namespace NorthwindApiApp.Controllers
         {
             try
             {
-                if (this.productManagementService.DestroyCategory(id))
+                if (this.productCategoryManagementService.DestroyCategory(id))
                 {
                     return Ok();
                 }
@@ -111,7 +110,7 @@ namespace NorthwindApiApp.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]ProductCategory category)
         { 
-            if (this.productManagementService.UpdateCategories(id, category))
+            if (this.productCategoryManagementService.UpdateCategories(id, category))
             {
                 return NoContent();
             }
@@ -127,7 +126,7 @@ namespace NorthwindApiApp.Controllers
             byte[] bytes = null;
             try
             {
-                if (this.productManagementService.TryShowPicture(id, out bytes))
+                if (this.productCategoryPicturesService.TryShowPicture(id, out bytes))
                 {
                     return Ok(File(bytes, "multipart/form-data;"));
                 }
@@ -154,7 +153,7 @@ namespace NorthwindApiApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!this.productManagementService.UpdatePicture(id, null))
+            if (!this.productCategoryPicturesService.UpdatePicture(id, null))
             {
                 return BadRequest("No such id");
             }
@@ -223,7 +222,7 @@ namespace NorthwindApiApp.Controllers
         [HttpDelete("{id}/{property}")]
         public IActionResult DeletePicture(int id, string property)
         {
-            if (this.productManagementService.DestroyPicture(id))
+            if (this.productCategoryPicturesService.DestroyPicture(id))
             {
                 return Ok();
             }
