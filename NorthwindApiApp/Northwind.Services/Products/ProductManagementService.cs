@@ -214,7 +214,18 @@
         /// <inheritdoc/>
         public bool UpdatePicture(int categoryId, Stream stream)
         {
-            throw new NotImplementedException();
+            foreach (var categoryRow in this.Context.GetCategories())
+            {
+                var categoryObj = this.FromStrToProductCategory(categoryRow);
+                if (categoryId == categoryObj.Id)
+                {
+                    categoryObj.Description = $"\\Users\\PrimoTibalt\\Desktop\\Studying\\C#\\ASPWEBAPI\\NorthwindApiApp\\NorthwindApiApp\\obj\\images\\{categoryObj.Id}";
+                    this.UpdateCategories(categoryId, categoryObj);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <inheritdoc/>
