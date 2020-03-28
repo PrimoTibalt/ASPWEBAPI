@@ -68,7 +68,7 @@ namespace NorthwindApiApp.Controllers
                     Name = name,
                     SupplierId = this.productManagementService.ShowProducts(10, 10).Count + 5,
                     CategoryId = (new Random().Next(1, 3)),
-                    QuantityPerUnit = $"{this.productManagementService.ShowCategories(10, 10).Count} items in 1 unit",
+                    QuantityPerUnit = $"{this.productManagementService.ShowProducts(10, 10).Count} items in 1 unit",
                     UnitPrice = 100 * name.Length,
                     UnitsInStock = 10,
                     UnitsOnOrder = 2,
