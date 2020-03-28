@@ -29,6 +29,8 @@ namespace NorthwindApiApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IProductManagementService, ProductManagementService>();
+            services.AddTransient<IProductCategoryManagementService, ProductCategoryManagementService>();
+            services.AddTransient<IProductCategoryPicturesService, ProductCategoryPictureService>();
             services.AddControllers();
             services.AddDbContext<NorthwindContext>(cont => cont.UseInMemoryDatabase("Northwind"));
         }
