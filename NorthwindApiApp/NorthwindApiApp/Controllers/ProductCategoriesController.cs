@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -107,6 +108,24 @@ namespace NorthwindApiApp.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet("{id}/picture")]
+        public IActionResult GetPicture(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost("{id}/picture")]
+        public IActionResult UploadPicture(int id, [FromBody]Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete("{id}/picture")]
+        public IActionResult DeletePicture(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
