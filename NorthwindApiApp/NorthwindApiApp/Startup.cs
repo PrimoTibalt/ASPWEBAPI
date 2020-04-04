@@ -15,6 +15,7 @@ using Northwind.Services.Products;
 using Northwind.Services.Context;
 using System.Data.SqlClient;
 using Northwind.Services.DataAccess.Services;
+using Northwind.DataAccess.SqlServer;
 
 namespace NorthwindApiApp
 {
@@ -33,7 +34,7 @@ namespace NorthwindApiApp
             services.AddTransient<IProductManagementService, ProductManagementDataAccessService>();
             services.AddTransient<IProductCategoryManagementService, ProductCategoriesManagementDataAccessService>();
             services.AddTransient<IProductCategoryPicturesService, ProductCategoryPicturesManagementDataAccessService>();
-            services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, Northwind.DataAccess.SqlServerDataAccessFactory>();
+            services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, SqlServerDataAccessFactory>();
 
             services.AddControllers();
             services.AddDbContext<NorthwindContext>(cont => cont.UseInMemoryDatabase("Northwind"));
