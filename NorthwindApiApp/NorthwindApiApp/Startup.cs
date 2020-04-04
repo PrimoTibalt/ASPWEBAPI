@@ -32,7 +32,7 @@ namespace NorthwindApiApp
         {
             services.AddTransient<IProductManagementService, ProductManagementDataAccessService>();
             services.AddTransient<IProductCategoryManagementService, ProductCategoriesManagementDataAccessService>();
-            services.AddTransient<IProductCategoryPicturesService, ProductCategoryPictureService>();
+            services.AddTransient<IProductCategoryPicturesService, ProductCategoryPicturesManagementDataAccessService>();
             services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, Northwind.DataAccess.SqlServerDataAccessFactory>();
 
             services.AddControllers();
