@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Northwind.Services.Products;
 using Northwind.Services.Context;
 using System.Data.SqlClient;
+using Northwind.Services.DataAccess.Services;
 
 namespace NorthwindApiApp
 {
@@ -29,9 +30,11 @@ namespace NorthwindApiApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IProductManagementService, ProductManagementService>();
-            services.AddTransient<IProductCategoryManagementService, ProductCategoryManagementService>();
+            services.AddTransient<IProductManagementService, ProductManagementDataAccessService>();
+            services.AddTransient<IProductCategoryManagementService, ProductCategoriesManagementDataAccessService>();
             services.AddTransient<IProductCategoryPicturesService, ProductCategoryPictureService>();
+            services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, Northwind.DataAccess.SqlServerDataAccessFactory>();
+
             services.AddControllers();
             services.AddDbContext<NorthwindContext>(cont => cont.UseInMemoryDatabase("Northwind"));
             services.AddScoped((service) =>
@@ -40,8 +43,6 @@ namespace NorthwindApiApp
                 sqlConnection.Open();
                 return sqlConnection;
             });
-
-            services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, Northwind.DataAccess.SqlServerDataAccessFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
