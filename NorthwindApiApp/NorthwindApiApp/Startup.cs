@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Northwind.Services.Products;
 using Northwind.Services.Context;
+using System.Data.SqlClient;
 
 namespace NorthwindApiApp
 {
@@ -33,6 +34,14 @@ namespace NorthwindApiApp
             services.AddTransient<IProductCategoryPicturesService, ProductCategoryPictureService>();
             services.AddControllers();
             services.AddDbContext<NorthwindContext>(cont => cont.UseInMemoryDatabase("Northwind"));
+            services.AddScoped((service) =>
+            {
+                var sqlConnection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                sqlConnection.Open();
+                return sqlConnection;
+            });
+
+            services.AddTransient<Northwind.DataAccess.NorthwindDataAccessFactory, Northwind.DataAccess.SqlServerDataAccessFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
