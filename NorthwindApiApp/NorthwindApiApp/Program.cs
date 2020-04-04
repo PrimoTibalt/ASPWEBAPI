@@ -16,11 +16,22 @@ namespace NorthwindApiApp
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                }).ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+
+                    config.AddXmlFile("config.xml", optional: true, reloadOnChange: true).AddXmlFile($"config.{env.EnvironmentName}.xml",
+                                         optional: true, reloadOnChange: true);
+                    ;
+
+                    config.AddEnvironmentVariables();
                 });
+        }
     }
 }

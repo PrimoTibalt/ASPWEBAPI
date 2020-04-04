@@ -40,7 +40,8 @@ namespace NorthwindApiApp
             services.AddDbContext<NorthwindContext>(cont => cont.UseInMemoryDatabase("Northwind"));
             services.AddScoped((service) =>
             {
-                var sqlConnection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                var sqlConnection = new SqlConnection(this.Configuration["connectionString:connectionString"].ToString());
+                // @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
                 sqlConnection.Open();
                 return sqlConnection;
             });
