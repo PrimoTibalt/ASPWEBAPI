@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.DataAccess", "Nor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Services.DataAccess", "Northwind.Services.DataAccess\Northwind.Services.DataAccess.csproj", "{BB3BB19C-4A19-41C7-BAB0-0CB2F562D63F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.DataAccess.SqlServer", "Northwind.DataAccess.SqlServer\Northwind.DataAccess.SqlServer.csproj", "{A25E94A1-6ED0-4FEE-B9EE-6EBF968362C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{BB3BB19C-4A19-41C7-BAB0-0CB2F562D63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3BB19C-4A19-41C7-BAB0-0CB2F562D63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3BB19C-4A19-41C7-BAB0-0CB2F562D63F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A25E94A1-6ED0-4FEE-B9EE-6EBF968362C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A25E94A1-6ED0-4FEE-B9EE-6EBF968362C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A25E94A1-6ED0-4FEE-B9EE-6EBF968362C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A25E94A1-6ED0-4FEE-B9EE-6EBF968362C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
